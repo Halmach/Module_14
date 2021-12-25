@@ -23,9 +23,7 @@ namespace Module_14
                 Console.WriteLine(name);
             }
 
-            names = objects.Where(n => n is string).OrderBy(n => n);
-
-            foreach (var name in names)
+            foreach (var name in objects.Where(n => n is string).OrderBy(n => n))
             {
                 Console.WriteLine(name);
             }
