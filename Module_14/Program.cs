@@ -8,8 +8,41 @@ namespace Module_14
     {
         static void Main(string[] args)
         {
-            ShowHowLetWorkingInLINQ();
+            ShowHowMultipleSamplingWorkingInLINQ();
 
+        }
+
+        private static void ShowHowMultipleSamplingWorkingInLINQ()
+        {
+            List<Student> students = new List<Student>
+{
+               new Student {Name="Андрей", Age=23, Languages = new List<string> {"английский", "немецкий" }},
+               new Student {Name="Сергей", Age=27, Languages = new List<string> {"английский", "французский" }},
+               new Student {Name="Дмитрий", Age=29, Languages = new List<string> {"английский", "испанский" }},
+               new Student {Name="Василий", Age=24, Languages = new List<string> {"испанский", "немецкий" }}
+            };
+
+            var coarses = new List<Coarse>
+            {
+               new Coarse {Name="Язык программирования C#", StartDate = new DateTime(2020, 12, 20)},
+               new Coarse {Name="Язык SQL и реляционные базы данных", StartDate = new DateTime(2020, 12, 15)},
+            };
+
+            var studentsFilter = from s in students
+                                 where s.Age < 29 && s.Languages.Contains("английский")
+                                 let YearOfBirth = DateTime.Now.Year - s.Age
+                                 from coarse in coarses where coarse.Name == "Язык программирования C#"                             
+                                 select new 
+                                 {
+                                     Name = s.Name,
+                                     YearOfBirth = YearOfBirth,
+                                     CoarseName = coarse.Name
+                                 };
+
+            foreach (var stud in studentsFilter)
+            {
+                Console.WriteLine(stud.Name + " добавлен в курс " + stud.CoarseName);
+            }
         }
 
         private static void ShowHowLetWorkingInLINQ()
@@ -35,8 +68,6 @@ namespace Module_14
             {
                 Console.WriteLine(stud.Name + " " + stud.YearOfBirth);
             }
-
-
         }
         
         private static void ChooseByNameLengthWithOrdering()
