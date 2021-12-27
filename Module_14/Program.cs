@@ -8,9 +8,22 @@ namespace Module_14
     {
         static void Main(string[] args)
         {
-            ConcatToNewCollectionWithOrdering();
+            ChooseByNameLengthWithOrdering();
 
-        } 
+        }
+        
+        private static void ChooseByNameLengthWithOrdering()
+        {
+            string[] words = { "Обезьяна", "Лягушка", "Кот", "Собака", "Черепаха" };
+
+            var animals = words.Select( a => new
+            {
+                Name = a,
+                Length = a.Length
+            }).OrderBy(a => a.Length);
+
+            foreach (var animal in animals) Console.WriteLine(animal.Name);
+        }
 
         private static void ConcatToNewCollectionWithOrdering()
         {
