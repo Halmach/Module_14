@@ -8,9 +8,36 @@ namespace Module_14
     {
         static void Main(string[] args)
         {
-            SelectPopulationFromCity();
+            ConcatToNewCollectionWithOrdering();
 
         } 
+
+        private static void ConcatToNewCollectionWithOrdering()
+        {
+            var numsList = new List<int[]>()
+            {
+               new[] {2, 3, 7, 1},
+               new[] {45, 17, 88, 0},
+               new[] {23, 32, 44, -6},
+            };
+
+            var numbers = from nums in numsList from num in nums orderby num select num;
+
+            numbers = numsList.SelectMany(s => s).OrderBy(s => s);
+
+            foreach (var num in numbers) Console.WriteLine(num);
+        }
+
+        private static void ConcatByLINQ()
+        {
+            string[] text = { "Раз два три",
+                               "четыре пять шесть",
+                               "семь восемь девять" };
+
+            var words = from str in text from word in str.Split(' ') select word;
+
+            foreach (var word in words) Console.WriteLine(word);
+        }
 
         private static void SelectPopulationFromCity()
         {
