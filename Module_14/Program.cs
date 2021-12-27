@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Module_14
 {
@@ -8,8 +9,34 @@ namespace Module_14
     {
         static void Main(string[] args)
         {
-            ShowHowMultipleSamplingWorkingInLINQ();
+            ShowKontactsPageToPage();
 
+        }
+
+        private static void ShowKontactsPageToPage()
+        {
+            var contacts = new List<Contact>()
+            {
+               new Contact() { Name = "Андрей", Phone = 7999945005 },
+               new Contact() { Name = "Сергей", Phone = 799990455 },
+               new Contact() { Name = "Иван", Phone = 79999675 },
+               new Contact() { Name = "Игорь", Phone = 8884994 },
+               new Contact() { Name = "Анна", Phone = 665565656 },
+               new Contact() { Name = "Василий", Phone = 3434 }
+            };
+
+            int i = 0;
+
+            while (true)
+            {
+                Console.SetCursorPosition(0, 0);
+                foreach (var person in contacts.Skip(i).Take(2))
+                {
+                    Console.WriteLine(person.Name + "   ");
+                }
+                Thread.Sleep(1000);
+                i = (i < 4) ? i + 2 : 0;
+            }
         }
 
         private static void ShowHowMultipleSamplingWorkingInLINQ()
