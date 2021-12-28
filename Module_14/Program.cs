@@ -9,7 +9,35 @@ namespace Module_14
     {
         static void Main(string[] args)
         {
-            ShowKontactsPageToPage();
+            ShowContactsByReadKey();
+
+        }
+
+        private static void ShowContactsByReadKey()
+        {
+            //  создаём пустой список с типом данных Contact
+            var phoneBook = new List<ContactExtended>();
+
+            // добавляем контакты
+            phoneBook.Add(new ContactExtended("Игорь", "Николаев", 79990000001, "igor@example.com"));
+            phoneBook.Add(new ContactExtended("Сергей", "Довлатов", 79990000010, "serge@example.com"));
+            phoneBook.Add(new ContactExtended("Анатолий", "Карпов", 79990000011, "anatoly@example.com"));
+            phoneBook.Add(new ContactExtended("Валерий", "Леонтьев", 79990000012, "valera@example.com"));
+            phoneBook.Add(new ContactExtended("Сергей", "Брин", 799900000013, "serg@example.com"));
+            phoneBook.Add(new ContactExtended("Иннокентий", "Смоктуновский", 799900000013, "innokentii@example.com"));
+
+            while (true)
+            {
+                var input = (Console.ReadKey().KeyChar);
+                var parsed = Int32.TryParse(input.ToString(), out int pageNumber);
+                Console.SetCursorPosition(0, 0);
+                Thread.Sleep(1000);
+                foreach (var person in phoneBook.Skip((pageNumber - 1) * 2).Take(2))
+                {
+                    Console.WriteLine(person.Name + "                    ");
+                }
+                
+            }
 
         }
 
@@ -24,6 +52,8 @@ namespace Module_14
                new Contact() { Name = "Анна", Phone = 665565656 },
                new Contact() { Name = "Василий", Phone = 3434 }
             };
+
+            contacts.RemoveAll(user => user.Name == "Андрей");
 
             int i = 0;
 
