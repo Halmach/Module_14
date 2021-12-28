@@ -13,7 +13,7 @@ namespace Module_14
 
         }
 
-        private static void ShowContactsByReadKey()
+        private static void ShowContactsByReadKey() 
         {
             //  создаём пустой список с типом данных Contact
             var phoneBook = new List<ContactExtended>();
@@ -30,15 +30,13 @@ namespace Module_14
             {
                 var input = (Console.ReadKey().KeyChar);
                 var parsed = Int32.TryParse(input.ToString(), out int pageNumber);
-                Console.SetCursorPosition(0, 0);
                 Thread.Sleep(1000);
+                Console.Clear();
                 foreach (var person in phoneBook.Skip((pageNumber - 1) * 2).Take(2))
                 {
-                    Console.WriteLine(person.Name + "                    ");
-                }
-                
+                    Console.WriteLine(person.Name);
+                }   
             }
-
         }
 
         private static void ShowKontactsPageToPage()
